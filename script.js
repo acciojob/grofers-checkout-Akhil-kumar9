@@ -1,23 +1,22 @@
+// Select all price cells
+const prices = document.querySelectorAll(".prices");
+let total = 0;
 
-const getSum = () => {
-  const prices = document.querySelectorAll(".prices"); // get all price cells
-  let sum = 0;
+// Calculate the sum of prices
+prices.forEach(priceCell => {
+  total += parseFloat(priceCell.textContent);
+});
 
-  for (let i = 0; i < prices.length; i++) {
-    sum += parseFloat(prices[i].textContent); // convert text to number
-  }
+// Create a new row
+const table = document.getElementById("groceryTable");
+const totalRow = document.createElement("tr");
+const totalCell = document.createElement("td");
 
-  // Create new row for total
-  const table = document.getElementById("groceryTable");
-  const totalRow = document.createElement("tr");
-  const totalCell = document.createElement("td");
+// Span the cell across both columns
+totalCell.colSpan = 2;
+totalCell.className = "total";
+totalCell.textContent = "Total Price: Rs " + total;
 
-  totalCell.colSpan = 2; // span across both columns
-  totalCell.textContent = "Total Price: " + sum;
-  totalCell.style.fontWeight = "bold";
-
-  totalRow.appendChild(totalCell);
-  table.appendChild(totalRow);
-};
-
-
+// Append cell and row to table
+totalRow.appendChild(totalCell);
+table.appendChild(totalRow);
